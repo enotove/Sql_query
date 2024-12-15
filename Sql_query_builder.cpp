@@ -7,6 +7,24 @@ Sql_query_builder& Sql_query_builder::AddFrom(std::string from)
 	return *this;
 }
 
+Sql_query_builder& Sql_query_builder::AddWhere(const std::map<std::string, std::string>& key) noexcept
+{
+	for (auto i{ key.begin() }; i != key.end(); ++i )
+	{
+		query.wheres[i->first] = i->second;
+	}
+	return *this;
+}
+
+Sql_query_builder& Sql_query_builder::AddColumn(const std::vector<std::string>& columns) noexcept
+{
+	for (int i = 0; i < columns.size(); i++)
+	{
+		query.columns.push_back(columns[i]);
+	}
+	return *this;
+}
+
 Sql_query_builder& Sql_query_builder::AddWhere(std::string name, std::string value)
 {
 	query.wheres[name] = value;
